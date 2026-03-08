@@ -1,13 +1,13 @@
-<!-- department_confirm_delete.html -->
 {% extends 'plant.html' %}
-
 {% block title %}Eliminar Departamento{% endblock %}
-
 {% block content %}
-  <h1>¿Estás seguro de que deseas eliminar el departamento "{{ departamento.nombre }}"?</h1>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Confirmar Eliminación</button>
-    <a href="{% url 'departamento_lista' %}">Cancelar</a>
-  </form>
+    <h1 class="mb-4 text-danger">Eliminar Departamento</h1>
+    <div class="alert alert-warning">
+    ¿Estás seguro de que deseas eliminar el departamento "{{ departamento.nombre }}"?
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirmar</button>
+        <a href="{% url 'departamento_lista' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
 {% endblock %}

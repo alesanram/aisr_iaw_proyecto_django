@@ -1,3 +1,21 @@
 from django.db import models
+from cliente.models import Cliente
+from producto.models import Producto
 
-# Create your models here.
+
+class Venta(models.Model):
+
+    codigo = models.CharField(max_length=20)
+
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+
+    cantidad = models.IntegerField()
+
+    fecha = models.DateField()
+
+    def __str__(self):
+        return self.codigo

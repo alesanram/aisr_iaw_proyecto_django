@@ -5,12 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sistema de Ventas{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* cuerpo ocupa toda la pantalla */
+            background: #f5f5f5;
+        }
+
+        #main-content {
+            flex: 1; /* ocupa todo el espacio restante entre header/nav y footer */
+            overflow: hidden;
+        }
+
+        .row.h-100 {
+            height: 100%; /* fila principal ocupa todo el espacio del main-content */
+        }
+
+        aside {
+            height: 100%; /* aside ocupa toda la altura disponible */
+            overflow-y: auto; /* si el menú es largo, scroll solo en aside */
+        }
+
+        section {
+            height: 100%; /* contenido principal ocupa toda la altura disponible */
+            overflow-y: auto; /* scroll si el contenido es demasiado largo */
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .menu-link:hover {
+            color: #0d6efd;
+            font-weight: 500;
+        }
+
+        footer {
+            flex-shrink: 0; /* el footer no se reduce */
+        }
+    </style>
 </head>
 <body>
-    <header class="bg-success text-white text-center p-3">
-        <h1>Sistema de Ventas Django</h1>
-    </header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <header class="bg-success text-white text-center py-3 shadow"><h2>Django</h2></header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'welcome' %}">Inicio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -19,158 +64,61 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        Departamentos
-                        </a>
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Departamentos</a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="{% url 'departamento_lista' %}">
-                                    Listar Departamentos
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{% url 'departamento_create' %}">
-                                    Crear Departamento
-                                </a>
-                            </li>
+                            <li><a class="dropdown-item" href="{% url 'departamento_lista' %}">Ver departamentos</a></li>
+                            <li><a class="dropdown-item" href="{% url 'departamento_create' %}">Crear departamento</a></li>
                         </ul>
                     </li>
-
-<li class="nav-item dropdown">
-
-<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-Productos
-</a>
-
-<ul class="dropdown-menu">
-
-<li>
-<a class="dropdown-item" href="{% url 'producto_lista' %}">
-Listar Productos
-</a>
-</li>
-
-<li>
-<a class="dropdown-item" href="{% url 'producto_create' %}">
-Crear Producto
-</a>
-</li>
-
-</ul>
-
-</li>
-
-<li class="nav-item dropdown">
-
-<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-Clientes
-</a>
-
-<ul class="dropdown-menu">
-
-<li>
-<a class="dropdown-item" href="#">
-Listar Clientes
-</a>
-</li>
-
-<li>
-<a class="dropdown-item" href="#">
-Crear Cliente
-</a>
-</li>
-
-</ul>
-
-</li>
-
-<li class="nav-item dropdown">
-
-<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-Ventas
-</a>
-
-<ul class="dropdown-menu">
-
-<li>
-<a class="dropdown-item" href="#">
-Listar Ventas
-</a>
-</li>
-
-<li>
-<a class="dropdown-item" href="#">
-Crear Venta
-</a>
-</li>
-
-</ul>
-
-</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</nav>
-
-
-<div class="container mt-4">
-
-<div class="row">
-
-<aside class="col-md-3">
-
-<div class="card">
-
-<div class="card-header">
-Menú
-</div>
-
-<div class="card-body">
-
-<ul class="list-group">
-
-<li class="list-group-item">
-<a href="{% url 'departamento_lista' %}">
-Departamentos
-</a>
-</li>
-
-<li class="list-group-item">
-<a href="{% url 'producto_lista' %}">
-Productos
-</a>
-</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</aside>
-
-
-<section class="col-md-9">
-
-{% block content %}
-{% endblock %}
-
-</section>
-
-</div>
-
-</div>
-
-
-<footer class="bg-dark text-white text-center p-3 mt-5">
-<p>© 2026 alesanram Django</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Productos</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'producto_lista' %}">Ver productos</a></li>
+                            <li><a class="dropdown-item" href="{% url 'producto_create' %}">Crear producto</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Clientes</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'cliente_lista' %}">Ver clientes</a></li>
+                            <li><a class="dropdown-item" href="{% url 'cliente_create' %}">Crear cliente</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Ventas</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'venta_lista' %}">Ver ventas</a></li>
+                            <li><a class="dropdown-item" href="{% url 'venta_create' %}">Crear venta</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="main-content" class="container-fluid mt-3">
+        <div class="row h-100">
+            <aside class="col-md-3">
+                <div class="card shadow h-100">
+                    <div class="card-header bg-primary text-white">Menú</div>
+                    <div class="list-group list-group-flush">
+                        <a class="list-group-item menu-link" href="{% url 'departamento_lista' %}">Departamentos</a>
+                        <a class="list-group-item menu-link" href="{% url 'producto_lista' %}">Productos</a>
+                        <a class="list-group-item menu-link" href="{% url 'cliente_lista' %}">Clientes</a>
+                        <a class="list-group-item menu-link" href="{% url 'venta_lista' %}">Ventas</a>
+                    </div>
+                </div>
+            </aside>
+            <section class="col-md-9">
+        <div class="card shadow h-100">
+            <div class="card-body">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+        </div>
+    </div>
+    <footer class="bg-dark text-white text-center p-3 mt-2">© 2026 alesanram Django</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

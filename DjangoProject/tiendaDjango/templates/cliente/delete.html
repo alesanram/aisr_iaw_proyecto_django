@@ -1,0 +1,15 @@
+{% extends 'plant.html' %}
+
+{% block title %}Eliminar Cliente{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4 text-danger">Eliminar Cliente</h1>
+    <div class="alert alert-warning">
+        ¿Seguro que quieres eliminar "{{ cliente.nombre }}"?
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirmar</button>
+        <a href="{% url 'cliente_lista' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

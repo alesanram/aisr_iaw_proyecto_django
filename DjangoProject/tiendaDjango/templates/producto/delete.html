@@ -1,0 +1,19 @@
+{% extends 'plant.html' %}
+
+{% block title %}Eliminar Producto{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4 text-danger">Eliminar Producto</h1>
+
+<div class="alert alert-warning">
+¿Seguro que quieres eliminar "{{ producto.nombre }}"?
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar</button>
+    <a href="{% url 'producto_lista' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+{% endblock %}

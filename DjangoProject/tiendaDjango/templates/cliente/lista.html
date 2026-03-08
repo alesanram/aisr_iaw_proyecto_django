@@ -3,40 +3,59 @@
 {% block title %}Clientes{% endblock %}
 
 {% block content %}
-
-<h1>Listado de Clientes</h1>
-
+<h1 class="mb-4">Listado de Clientes</h1>
 <a class="btn btn-primary mb-3" href="{% url 'cliente_create' %}">Crear Cliente</a>
-
-<table class="table table-striped">
-
-<tr>
-<th>Nombre</th>
-<th>Email</th>
-<th>Teléfono</th>
-<th>Acciones</th>
-</tr>
-
-{% for cliente in context %}
-
-<tr>
-
-<td>{{ cliente.nombre }}</td>
-<td>{{ cliente.email }}</td>
-<td>{{ cliente.telefono }}</td>
-
-<td>
-
-<a class="btn btn-warning btn-sm" href="{% url 'cliente_update' cliente.pk %}">Editar</a>
-
-<a class="btn btn-danger btn-sm" href="{% url 'cliente_delete' cliente.pk %}">Eliminar</a>
-
-</td>
-
-</tr>
-
-{% endfor %}
-
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cliente in context %}
+        <tr>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>
+                <a class="btn btn-warning btn-sm" href="{% url 'cliente_update' cliente.pk %}">Editar</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'cliente_delete' cliente.pk %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 
+    {% if context.has_other_pages %}
+        <nav>
+          <ul class="pagination">
+            {% if context.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ context.previous_page_number }}">Anterior</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+            {% endif %}
+
+            {% for num in context.paginator.page_range %}
+            {% if context.number == num %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if context.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ context.next_page_number }}">Siguiente</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+            {% endif %}
+          </ul>
+        </nav>
+    {% endif %}
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'plant.html' %}
+
+{% block title %}
+{% if form.instance.pk %}Editar Venta{% else %}Crear Venta{% endif %}
+{% endblock %}
+{% block content %}
+    <h1 class="mb-4">
+    {% if form.instance.pk %}Editar Venta{% else %}Crear Venta{% endif %}
+    </h1>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'venta_lista' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const productoSelect = document.getElementById("id_producto");
+        const precioInput = document.getElementById("id_precio");
+
+        productoSelect.addEventListener("change", function() {
+            const productoId = this.value;
+            if (productoId) {
+                fetch(`/producto/precio/${productoId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        precioInput.value = data.precio;
+                    });
+            }
+        });
+    });
+    </script>
+{% endblock %}

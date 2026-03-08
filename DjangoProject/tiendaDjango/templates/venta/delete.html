@@ -1,0 +1,19 @@
+{% extends 'plant.html' %}
+
+{% block title %}Eliminar Venta{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4 text-danger">Eliminar Venta</h1>
+
+<div class="alert alert-warning">
+¿Seguro que quieres eliminar la venta "{{ venta.codigo }}"?
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar</button>
+    <a href="{% url 'venta_lista' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+{% endblock %}
