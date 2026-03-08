@@ -1,0 +1,44 @@
+<!-- department_list.html -->
+{% extends 'plant.html' %}
+
+{% block title %}Listado de Departamentos{% endblock %}
+
+{% block content %}
+  <h1>Listado de Departamentos</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for departamento in context %}
+        <tr>
+          <td>{{ departamento.nombre }}</td>
+          <td>
+            <a href="{% url 'departamento_update' departamento.pk %}">Editar</a>
+            <a href="{% url 'departamento_delete' departamento.pk %}">Eliminar</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Paginación -->
+  <div class="pagination">
+    <span class="step-links">
+      {% if context.has_previous %}
+        <a href="?page=1">&laquo; primera</a>
+        <a href="?page={{ context.previous_page_number }}">anterior</a>
+      {% endif %}
+      <span class="current">
+        Página {{ context.number }} de {{ context.paginator.num_pages }}.
+      </span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ context.next_page_number }}">siguiente</a>
+        <a href="?page={{ context.paginator.num_pages }}">última &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+{% endblock %}

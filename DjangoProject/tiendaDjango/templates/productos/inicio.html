@@ -1,0 +1,10 @@
+{% extends 'plant.html' %}
+{% block title %}Bienvenido{% endblock %}
+{% block content %}
+  <h1>Mis Productos</h1>
+    <ul>
+    {% for i in productos %}
+        <li>{{ i }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
