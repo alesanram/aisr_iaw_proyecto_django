@@ -123,6 +123,3 @@ python manage.py runserver
 * Paginación activa en todos los listados.
 * Compatible con Django ≥ 5.1 y Python ≥ 3.11.
 ---
-
-
-¿Quieres que haga eso?
