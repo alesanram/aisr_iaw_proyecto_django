@@ -42,7 +42,6 @@ source .venv/bin/activate
 
 ```bash
 pip install django
-pip install -r requirements.txt  # si existe
 ```
 
 4. **Crear y aplicar migraciones**
