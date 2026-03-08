@@ -1,0 +1,81 @@
+{% extends 'plant.html' %}
+
+{% block title %}Listado de Productos{% endblock %}
+
+{% block content %}
+
+<h1>Listado de Productos</h1>
+
+<a href="{% url 'producto_create' %}">Crear Producto</a>
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Precio</th>
+<th>IVA</th>
+<th>Stock</th>
+<th>Departamento</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for producto in context %}
+
+<tr>
+<td>{{ producto.nombre }}</td>
+<td>{{ producto.precio }}</td>
+<td>{{ producto.iva }}</td>
+<td>{{ producto.stock }}</td>
+<td>{{ producto.departamento }}</td>
+
+<td>
+
+<a href="{% url 'producto_update' producto.pk %}">Editar</a>
+
+<a href="{% url 'producto_delete' producto.pk %}">Eliminar</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+
+<div class="pagination">
+
+<span class="step-links">
+
+{% if context.has_previous %}
+
+<a href="?page=1">&laquo; primera</a>
+
+<a href="?page={{ context.previous_page_number }}">anterior</a>
+
+{% endif %}
+
+<span class="current">
+
+Página {{ context.number }} de {{ context.paginator.num_pages }}
+
+</span>
+
+{% if context.has_next %}
+
+<a href="?page={{ context.next_page_number }}">siguiente</a>
+
+<a href="?page={{ context.paginator.num_pages }}">última &raquo;</a>
+
+{% endif %}
+
+</span>
+
+</div>
+
+{% endblock %}

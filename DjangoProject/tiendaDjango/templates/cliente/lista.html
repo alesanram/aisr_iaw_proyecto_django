@@ -1,0 +1,42 @@
+{% extends 'plant.html' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+
+<h1>Listado de Clientes</h1>
+
+<a class="btn btn-primary mb-3" href="{% url 'cliente_create' %}">Crear Cliente</a>
+
+<table class="table table-striped">
+
+<tr>
+<th>Nombre</th>
+<th>Email</th>
+<th>Teléfono</th>
+<th>Acciones</th>
+</tr>
+
+{% for cliente in context %}
+
+<tr>
+
+<td>{{ cliente.nombre }}</td>
+<td>{{ cliente.email }}</td>
+<td>{{ cliente.telefono }}</td>
+
+<td>
+
+<a class="btn btn-warning btn-sm" href="{% url 'cliente_update' cliente.pk %}">Editar</a>
+
+<a class="btn btn-danger btn-sm" href="{% url 'cliente_delete' cliente.pk %}">Eliminar</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
